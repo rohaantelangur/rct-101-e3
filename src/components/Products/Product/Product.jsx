@@ -26,7 +26,14 @@ const Product = () => {
       <h6 data-cy="product-description">{item.description}</h6>
       <button data-cy="product-add-item-to-cart-button" onClick={()=>setCartItem([...CartItem,{ id:item.id,qty:1}])}>Add To Cart</button>
       <div>
-        <button data-cy="product-increment-cart-item-count-button" >+</button>
+        <button data-cy="product-increment-cart-item-count-button" onClick={()=>{
+          CartItem.map((cItem,ind)=>{
+            if(cItem.id === item.id){
+              cItem.qty+=1
+              setCartItem(CartItem)
+            }
+          })
+        }} >+</button>
         <span data-cy="product-count">
           {
             
