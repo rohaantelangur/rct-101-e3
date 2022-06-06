@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios"
-import { useParams } from "react-router-dom";
-import { AuthContext } from "../../../context/AuthContext";
 import { CartContext } from "../../../context/CartContext";
 
 const Product = () => {
@@ -41,8 +39,10 @@ const Product = () => {
             
             // CartItem.length
             CartItem.map((cItem,ind)=>{
-              if(cItem.id ===item.id){
+              if(cItem.id === item.id){
                 return cItem.qty;
+              }else{
+                return "";
               }
             })
 
@@ -62,9 +62,10 @@ const Product = () => {
           setCartItem(item)
           CartItem.map((cItem,ind)=>{
             if(cItem.id ===item.id){
-              CartItem.slice(ind)
-              setCartItem(CartItem)
-              console.log(CartItem)
+              let arr = CartItem.slice(ind)
+              setCartItem(arr)
+              console.log(cItem,ind)
+              setrefesh(Date.now())
             }
 
           })
