@@ -9,6 +9,7 @@ const Product = () => {
   // const product = { id: 1 };
   // let { id } = useParams();
   const [products, setproducts] = useState([])
+  const [refesh, setrefesh] = useState("")
   useEffect(() => {
     axios.get(`http://localhost:8080/products`).then((r)=>setproducts(r.data))
   }, [])
@@ -24,13 +25,14 @@ const Product = () => {
       <div data-cy={`product-${item.id}`} key={item.id}>
       <h3 data-cy="product-name">{item.name}</h3>
       <h6 data-cy="product-description">{item.description}</h6>
-      <button data-cy="product-add-item-to-cart-button" onClick={()=>setCartItem([...CartItem,{ id:item.id,qty:1}])}>Add To Cart</button>
+      <button data-cy="product-add-item-to-cart-button" onClick={()=>setCartItem([...CartItem,{ id:item.id,qty:1}])} >Add To Cart</button>
       <div>
         <button data-cy="product-increment-cart-item-count-button" onClick={()=>{
           CartItem.map((cItem,ind)=>{
             if(cItem.id === item.id){
               cItem.qty+=1
               setCartItem(CartItem)
+              setrefesh(Date.now())
             }
           })
         }} >+</button>
@@ -52,6 +54,7 @@ const Product = () => {
             if(cItem.id === item.id){
               cItem.qty-=1
               setCartItem(CartItem)
+              setrefesh(Date.now())
             }
           })
         }}>-</button>

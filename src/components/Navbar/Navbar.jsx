@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div data-cy="navbar" >
       <Link data-cy="navbar-home-link" to="/">Home</Link>
-      <Link to="/products" >Product</Link>
+      {/* <Link to="/products" >Product</Link> */}
       <span data-cy="navbar-cart-items-count">Cart: {CartItem.length}</span>
       <button data-cy="navbar-login-logout-button" onClick={handleOnClick}>Login/logout</button>
     </div>
